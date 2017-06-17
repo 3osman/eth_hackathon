@@ -16,7 +16,7 @@ training_words = training_text.split('\n')
 # Count character transitions
 for line in training_words:
     words = line.split(' ')
-    for word in word`ards:
+    for word in words:
 
         for char in word:
 
