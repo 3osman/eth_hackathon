@@ -1,6 +1,7 @@
 from scipy.stats import multivariate_normal
 import numpy as np
 import math
+symbols = ['a','b','c','d','e', 'f', 'g', 'h','i','j','k','l','m','n','o','p','q','r','s', 't', 'u', 'v', 'x', 'y', 'z', '-1']
 class ObservationSequence:
     def __init__(self, seq):
         self.seq = seq
