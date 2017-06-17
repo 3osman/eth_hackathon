@@ -1,0 +1,1 @@
+Stroing touch model from keyboard
