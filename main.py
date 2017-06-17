@@ -4,6 +4,23 @@ import math
 class ObservationSequence:
     def __init__(self, seq):
         self.seq = seq
+        self.beam = [0.0]*len(seq) 
+def get_key_for_symbol(symbol):
+    for key in keys:
+        if key.letter == symbol:
+            return key
+    return None
+
+def beam_prune(p, obs_seq, obs_seq_index):
+    bp = obs_seq.beam[obs_seq_index]
+    if p > bp:
+        obs_seq.beam[obs_seq_index] = p
+        return False
+    else:
+        if p < beam_width * bp:
+            return True
+        else:
+            return False
 class Observation:
     def __init__(self, x, y):
         self.x = x
@@ -92,7 +109,7 @@ def propagate(token, obs_seq, completed_tokens):
         # No more observations, add token to the list of completed tokens
         completed_tokens.append(token)
     else:
-        # There is another observation, propagate tokens for all symbols to the next observation index
+        # There is another observation, propagage tokens for all symbols to the next observation index
         next_obs = obs_seq.seq[next_ix]
         for symbol in symbols:
             if symbol == 'ɛ':
@@ -110,7 +127,7 @@ def propagate(token, obs_seq, completed_tokens):
                     propagate(new_token, obs_seq, completed_tokens)
     # Propagate tokens for all symbols (except epsilon) within the same observation index
     if ix >= 0:
-        for symbol in sym bols:
+        for symbol in symbols:
             if not symbol == 'ɛ':
                 key = get_key_for_symbol(symbol)
                 prior = get_prior(token.hypo+symbol, lm)
